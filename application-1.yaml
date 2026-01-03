@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: application-from-scratch
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      releaseName: application-from-helm
+      valueFiles:
+        - values-dev.yaml
+    path: nginx
+    repoURL: https://github.com/cedrico2016/argocd-tutorial.git  # URL of the git repo we want to use as source
+    targetRevision:  main #can be branch name, git tag, commit ...
